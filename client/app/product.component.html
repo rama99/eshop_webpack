@@ -1,0 +1,16 @@
+<h2><label class="label label-primary"> Product Details</label> </h2>
+
+<div *ngIf="product?.name">
+<div>
+<h4><strong>Title:</strong> {{product?.name}}</h4> 
+</div>
+<img [src]="product?.imageUrl"/>
+<br>
+<input type="button" class="btn btn-primary" (click)="onAddToCart(product)" value="Add to cart"/> 
+<div>
+<h4><strong>Description:</strong></h4> {{product?.description}}    
+</div>
+<div>
+    <h4><strong>Price:</strong> {{product?.price | currency}} </h4>
+</div>
+</div>

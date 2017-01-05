@@ -1,0 +1,18 @@
+<h2> Order Details </h2>
+
+
+    <div *ngFor="let order of orders;let even = even;let index = index">
+        <div class="well">           
+            <span><h4> Shipping Details </h4> </span>
+        {{order.firstName}} {{order.lastName}}<br>       
+        {{order.address1}}<br>
+        {{order.address2}}<br>  
+        {{order.state}} {{order.zip}}        
+        <span><h4>Items:</h4></span>
+        <div *ngFor="let item of order.items">
+            {{item.name}} 
+        </div>
+
+        </div>
+        
+    </div>

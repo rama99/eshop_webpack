@@ -1,0 +1,62 @@
+<h2><label class="label label-primary">My Shopping Bag</label></h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of cart; let idx = index">           
+            <td> {{item.name}}</td>
+            <td>{{item.price | currency}}</td>
+            <td>{{item.qty}}</td>
+            <td>{{item.total | currency}}</td>
+            <td><a (click)="remove(idx , item.pid)"><span class="glyphicon glyphicon-remove-sign"></span></a></td>
+        </tr>
+    </tbody>
+    
+</table>
+
+<div  *ngIf="cart.length">
+    <h3 class="well">Shipping Details </h3>
+     <form [formGroup]="formGroup" (ngSubmit)="placeOrder()" >
+         {{error}}
+         <div class="form-group">
+         <label for="exampleInputEmail1">First Name</label>
+            <input type="text" formControlName="firstName" maxlength="50" placeholder="First Name" class="form-control">
+         </div>  
+         <div class="form-group">
+         <label for="">Last Name</label>   
+         <input type="text" formControlName="lastName" maxlength="50" placeholder="Last Name" class="form-control">
+         </div>
+         <div class="form-group">
+         <label for="">Address 1</label>
+         <input type="text" formControlName="address1" maxlength="50" placeholder="Address 1" class="form-control">
+         </div>
+         <div class="form-group">
+         <label for="">Address 2</label>    
+         <input type="text" formControlName="address2" maxlength="50" placeholder="Address 2" class="form-control">
+         </div>
+
+         <div class="form-group">
+         <label for="">State</label>    
+         <select formControlName="state" class="form-control">
+             <option [value]="state" *ngFor="let state of states">
+                 {{state}}
+             </option>
+         </select>
+         </div>
+
+         <div class="form-group">
+         <label for="">Zip</label>    
+         <input type="text" formControlName="zip" maxlength="20" placeholder="zip" class="form-control">
+         </div>
+
+         <input type="submit" class="btn btn-primary" value="Place Order">
+     </form>   
+</div>

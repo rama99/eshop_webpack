@@ -1,0 +1,5 @@
+{
+    "db":{
+        "connection":"mongodb://edatabase:12kafour@ds145118.mlab.com:45118/edatabase"
+    }
+}
