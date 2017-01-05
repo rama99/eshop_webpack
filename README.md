@@ -14,7 +14,9 @@
 
 [TypeScript](https://www.typescriptlang.org/)
 
-[WebPack] (https://webpack.github.io/)  for module bundling and Tree Shaking
+[WebPack](https://webpack.github.io/)  for module bundling and Tree Shaking
+
+[Heroku](https://www.heroku.com/) for Deployment
 
     
 
