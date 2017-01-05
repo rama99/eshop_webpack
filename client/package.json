@@ -15,7 +15,10 @@
       "type": "MIT",
       "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
     }
-  ],
+  ], 
+  "engines": {
+    "node": "6.9.1"
+  },
   "dependencies": {
     "@angular/common": "~2.0.2",
     "@angular/compiler": "~2.0.2",
