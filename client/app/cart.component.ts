@@ -51,9 +51,10 @@ ngDoCheck() {
 // Remove Product from Bag
 remove(idx:number , pid:string) {  
 
+     $.blockUI();
     this.appService.RemoveFromCart(pid).subscribe( {
-                                                     next: (data) =>{this.cart.splice(idx,1);},
-                                                     error: (err) => { this.toaster.error(err)}
+                                                     next: (data) =>{  $.unblockUI(); this.cart.splice(idx,1);},
+                                                     error: (err) => {  $.unblockUI(); this.toaster.error(err)}
                                                    }
                                                  );
     
@@ -67,15 +68,17 @@ placeOrder() {
     }
     else 
     {
+        $.blockUI();
         this.appService.placeOrder(this.formGroup.value).subscribe( { next: (data) =>  {
             this.appService.resetCart();
             this.formGroup.reset();
             this.toaster.success('Order Placed !!');
             this.router.navigate(['']);
+            $.unblockUI();
             
         },
         
-        error: (err) => this.toaster.error(err)
+        error: (err) => { $.unblockUI(); this.toaster.error(err) }
        });
        
     }

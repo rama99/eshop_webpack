@@ -26,7 +26,11 @@ var ProductsComponent = (function () {
         this.route.params.forEach(function (params) {
             _this.categoryID = params['id'];
             _this.title.setTitle(_this.categoryID);
-            _this.products$ = _this.appService.GetProducts(_this.categoryID);
+            $.blockUI();
+            _this.appService.GetProducts(_this.categoryID).subscribe({
+                next: function (data) { $.unblockUI(); _this.products = data; },
+                error: function (err) { $.unblockUI(); _this.toaster.error(err); }
+            });
         });
     };
     return ProductsComponent;

@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { AppService } from './app.service';
+//import  "jquery";
+//import  "block-ui";
 var HomeComponent = (function () {
     function HomeComponent(appService, title, toaster) {
         this.appService = appService;
@@ -20,12 +22,15 @@ var HomeComponent = (function () {
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.title.setTitle('Home');
+        $.blockUI();
         this.appService.GetCategories().subscribe({ next: function (data) {
                 _this.appService.categories = data;
                 _this.categories = _this.appService.categories;
+                $.unblockUI();
             },
             error: function (err) {
                 _this.toaster.error(err);
+                $.unblockUI();
             }
         });
     };

@@ -30,8 +30,9 @@ ngOnInit() {
         id = params['id'];
         pid = params['pid'];
         
-        this.appService.GetProduct(id,pid).subscribe({next: data => { this.product = data;},
-                                                      error: err => { this.toastr.error(err) }              
+        $.blockUI();
+        this.appService.GetProduct(id,pid).subscribe({next: data => {  $.unblockUI(); this.product = data;},
+                                                      error: err => {  $.unblockUI(); this.toastr.error(err) }              
     });
     })
     

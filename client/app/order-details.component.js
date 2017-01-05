@@ -17,9 +17,10 @@ var OrderDetailsComponent = (function () {
     }
     OrderDetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $.blockUI();
         this.appservice.getOrders().subscribe({
-            next: function (data) { _this.orders = data; },
-            error: function (err) { _this.toaster.error(err); }
+            next: function (data) { $.unblockUI(); _this.orders = data; },
+            error: function (err) { $.unblockUI(); _this.toaster.error(err); }
         });
     };
     return OrderDetailsComponent;

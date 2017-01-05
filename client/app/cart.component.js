@@ -41,9 +41,10 @@ var CartComponent = (function () {
     // Remove Product from Bag
     CartComponent.prototype.remove = function (idx, pid) {
         var _this = this;
+        $.blockUI();
         this.appService.RemoveFromCart(pid).subscribe({
-            next: function (data) { _this.cart.splice(idx, 1); },
-            error: function (err) { _this.toaster.error(err); }
+            next: function (data) { $.unblockUI(); _this.cart.splice(idx, 1); },
+            error: function (err) { $.unblockUI(); _this.toaster.error(err); }
         });
     };
     CartComponent.prototype.placeOrder = function () {
@@ -52,13 +53,15 @@ var CartComponent = (function () {
             this.error = "Please enter shipping details";
         }
         else {
+            $.blockUI();
             this.appService.placeOrder(this.formGroup.value).subscribe({ next: function (data) {
                     _this.appService.resetCart();
                     _this.formGroup.reset();
                     _this.toaster.success('Order Placed !!');
                     _this.router.navigate(['']);
+                    $.unblockUI();
                 },
-                error: function (err) { return _this.toaster.error(err); }
+                error: function (err) { $.unblockUI(); _this.toaster.error(err); }
             });
         }
     };

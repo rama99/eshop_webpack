@@ -27,8 +27,9 @@ var ProductComponent = (function () {
         this.route.params.forEach(function (params) {
             id = params['id'];
             pid = params['pid'];
-            _this.appService.GetProduct(id, pid).subscribe({ next: function (data) { _this.product = data; },
-                error: function (err) { _this.toastr.error(err); }
+            $.blockUI();
+            _this.appService.GetProduct(id, pid).subscribe({ next: function (data) { $.unblockUI(); _this.product = data; },
+                error: function (err) { $.unblockUI(); _this.toastr.error(err); }
             });
         });
     };

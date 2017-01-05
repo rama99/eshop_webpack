@@ -17,9 +17,10 @@ export class OrderDetailsComponent implements  OnInit {
 
     ngOnInit() 
     {
+         $.blockUI();
         this.appservice.getOrders().subscribe({
-                                        next: (data) => { this.orders = data },
-                                        error: (err) => { this.toaster.error(err) }
+                                        next: (data) => {  $.unblockUI(); this.orders = data },
+                                        error: (err) => {  $.unblockUI(); this.toaster.error(err) }
                                         });
     }
 

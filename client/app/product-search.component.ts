@@ -23,11 +23,14 @@ export class ProductSearchComponent implements OnInit {
             this.route.params.subscribe( (params) => {
             this.search = params['search'];
 
-             this.service.searchProducts(this.search).subscribe( {
+             $.blockUI();
+            this.service.searchProducts(this.search).subscribe( {
                                                     next: (data) => { 
-                                                                        this.products = data;
+                                                                         $.unblockUI(); 
+                                                                         this.products = data;
                                                                     },
-                                                    error: (err) => { this.toaster.error(err) }
+                                                    error: (err) => {  $.unblockUI(); 
+                                                                       this.toaster.error(err) }
                                                  });
         })      
 

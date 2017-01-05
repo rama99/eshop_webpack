@@ -14,7 +14,8 @@ import { Product } from './viewModels/product';
 
 export class ProductsComponent implements  OnInit{
 
-    products$:Observable<Array<Product>>;
+    products:Array<Product>;
+   
     categoryID:string
 
     constructor( private title:Title , private appService:AppService , private router:Router , 
@@ -26,9 +27,17 @@ export class ProductsComponent implements  OnInit{
         this.route.params.forEach( (params) => {
             this.categoryID = params['id'];            
             this.title.setTitle(this.categoryID);
-            this.products$ = this.appService.GetProducts(this.categoryID);
+
+            $.blockUI();
+            this.appService.GetProducts(this.categoryID).subscribe( {
+
+              next: (data)  => {$.unblockUI(); this.products = data} ,
+              error: (err) => { $.unblockUI(); this.toaster.error(err); }
+
+            });
         });        
        
     }  
 
 }
+

@@ -22,11 +22,16 @@ var ProductSearchComponent = (function () {
         var _this = this;
         this.route.params.subscribe(function (params) {
             _this.search = params['search'];
+            $.blockUI();
             _this.service.searchProducts(_this.search).subscribe({
                 next: function (data) {
+                    $.unblockUI();
                     _this.products = data;
                 },
-                error: function (err) { _this.toaster.error(err); }
+                error: function (err) {
+                    $.unblockUI();
+                    _this.toaster.error(err);
+                }
             });
         });
     };

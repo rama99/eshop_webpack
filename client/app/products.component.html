@@ -1,6 +1,6 @@
 <h1><span class="label label-primary">{{categoryID}}</span></h1>
 <br>
-<div [ngClass]="{well: odd}" *ngFor="let product of products$ | async;let odd =  odd">    
+<div [ngClass]="{well: odd}" *ngFor="let product of products;let odd =  odd">    
         <h4><strong>{{product.name}}</strong>&nbsp;[ Price:  {{product.price | currency}} ]</h4>       
         <a [routerLink]="['/acategories' , product.category , 'products' , product._id ]"> <img [src]="product.imageUrl"  height="160" width="160"/></a>
 </div>
