@@ -73,10 +73,12 @@ module.exports = function(app) {
     app.engine('html' , require('ejs').renderFile);
 
     // static files path
+    app.use(express.static('node_modules')); 
+    
+    // static files path
     app.use(express.static('client'));  
 
-    // static files path
-    app.use(express.static('node_modules'));    
+   
 
     // body parsing
     app.use(bodyParser.json());
