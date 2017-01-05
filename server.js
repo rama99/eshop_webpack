@@ -25,7 +25,7 @@ else {*/
     // express configuration
     require('./express')(app);
 
-    let port = process.env.port || 3000;
+    let port = process.env.PORT || 3000;
       
     app.listen(port , () => {
      //console.log('Worker (%s) is now listining to http://localhost:%s' , cluster.worker.process.pid , port); 
