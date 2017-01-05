@@ -12,6 +12,9 @@
     "angular2",
     "es6"
   ],
+  "engines": {
+    "node": "6.9.1"
+  },
   "author": "kishore",
   "license": "ISC",
   "dependencies": {
@@ -38,7 +41,8 @@
     "passport-local": "^1.0.0",
     "response-time": "^2.3.2",
     "serve-favicon": "^2.3.2",
-    "timeout": "^0.2.1"
+    "timeout": "^0.2.1",
+    "webpack": "^2.2.0-rc.3"
   },
   "devDependencies": {
     "webpack": "^2.2.0-rc.3"
