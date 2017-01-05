@@ -1,7 +1,7 @@
 {
   "name": "mytasklist",
   "version": "1.0.0",
-  "scripts": {
+  "scripts": {    
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "build": "webpack",
     "lite": "lite-server",

@@ -4,7 +4,7 @@
   "description": "this is a sample ecomm application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "keywords": [
     "ecomm",
