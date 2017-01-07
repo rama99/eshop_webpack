@@ -15,6 +15,8 @@ const expressValidator = require('express-validator');
 const methodOverride = require('method-override');
 //const json = require('json');
 
+//var csrfProtection = csurf();
+
 // view engine
 const ejs = require('ejs');
 
@@ -50,7 +52,7 @@ module.exports = function(app) {
     app.use(cookieParser());
 
     // express session middleware , this should be after cookie parser
-    //app.use(session({secret:'clickclick'}));
+    app.use(session({secret:'clickclick'}));
 
     app.use(session({ 
     secret: 'clickclick',
@@ -62,7 +64,7 @@ module.exports = function(app) {
     }));
 
     // csurf should be after express session middleware
-    //app.use(csurf());
+    // app.use(csurf());
 
     // set view engine
     app.set('view engine' , ejs);

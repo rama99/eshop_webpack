@@ -23,9 +23,8 @@ var AppService = (function () {
     // Get all categories
     AppService.prototype.GetCategories = function () {
         return this.http.get('./categories')
-            .map(function (data) { return data.json(); })
+            .map(function (data) { console.log(data.headers.toJSON()); return data.json(); })
             .catch(this.handleError);
-        ;
     };
     // Get all Products
     AppService.prototype.GetProducts = function (categoryID) {
@@ -36,9 +35,12 @@ var AppService = (function () {
     // Get Product
     AppService.prototype.GetProduct = function (id, pid) {
         return this.http.get('./categories/' + id + '/products/' + pid)
-            .map(function (data) { return data.json(); })
+            .map(function (data) {
+            var headers = data.headers;
+            // this.csrfToken = headers.get('_csrf') ; 
+            return data.json();
+        })
             .catch(this.handleError);
-        ;
     };
     // Add an item to cart
     AppService.prototype.AddTocart = function (product) {
@@ -47,7 +49,7 @@ var AppService = (function () {
         //this.cart.push(item);
         // make an AJAX call to save the item in server session
         var url = './cart/add';
-        var headers = new Headers({ 'Content-Type': 'application/json' });
+        var headers = new Headers({ 'Content-Type': 'application/json', '_csrf': this.csrfToken });
         var requestOptions = new RequestOptions({ headers: headers });
         this.http.post(url, item, requestOptions)
             .map(function (data) {

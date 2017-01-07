@@ -25,6 +25,7 @@ router.get('/:id/products/:pid' ,  wrap(function *(req , res , next) {
     try 
     {
         console.log('url' , req.url);
+        //res.setHeader('_csrf', req.csrfToken());
         let product = yield category.getProduct(req , res , next);
         res.send(product);
     }

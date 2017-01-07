@@ -18,6 +18,7 @@ export class AppService {
     cart:Array<Cart> = [];
     states:Array<string> = [];
     total:number = 0;
+    csrfToken:string;
 
     constructor(private http: Http) { }
 
@@ -25,8 +26,8 @@ export class AppService {
     GetCategories():Observable<Array<Category>> {       
        
           return this.http.get('./categories')
-                     .map(data => data.json())
-                     .catch(this.handleError);;                                        
+                     .map(data => { console.log(data.headers.toJSON()) ; return data.json(); })
+                     .catch(this.handleError);                                        
 
     }
 
@@ -42,8 +43,10 @@ export class AppService {
     GetProduct(id:string, pid:string):Observable<Product> {
         
         return this.http.get('./categories/' + id + '/products/' + pid)
-                        .map(data => data.json())
-                        .catch(this.handleError);;
+                        .map(data =>{ let headers:Headers = data.headers; 
+                            // this.csrfToken = headers.get('_csrf') ; 
+                            return data.json() })
+                        .catch(this.handleError);
     }
 
     // Add an item to cart
@@ -54,7 +57,7 @@ export class AppService {
 
         // make an AJAX call to save the item in server session
         let url = './cart/add';
-        let headers = new Headers({'Content-Type':'application/json'});
+        let headers = new Headers({'Content-Type':'application/json' , '_csrf':this.csrfToken});
         let requestOptions = new RequestOptions({headers:headers});
        
         this.http.post(url , item , requestOptions)
