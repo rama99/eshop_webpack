@@ -66,6 +66,13 @@ module.exports = function(app) {
     // csurf should be after express session middleware
     // app.use(csurf());
 
+    // CORS middleware
+    app.use(function(req, res, next) {
+                        res.header("Access-Control-Allow-Origin", "*");
+                        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                        next();
+    });
+
     // set view engine
     app.set('view engine' , ejs);
 
